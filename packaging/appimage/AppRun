@@ -1,0 +1,15 @@
+#!/bin/sh
+# AppImage entry point: run dmpkeys with the bundled Python.
+HERE="$(dirname "$(readlink -f "$0")")"
+
+# Never let the host's Python settings leak into the bundled interpreter.
+unset PYTHONHOME PYTHONPATH PYTHONSTARTUP
+export PYTHONNOUSERSITE=1
+
+# Bundled X11/xkb helper libraries Qt's xcb plugin needs (see build-in-container.sh).
+# The original value is kept so host programs the app runs (pkexec, gsettings,
+# kbuildsycoca6) don't load our bundled libraries; see dmpkeys.core.host.host_env.
+export DMPKEYS_ORIG_LD_LIBRARY_PATH="${LD_LIBRARY_PATH-__unset__}"
+export LD_LIBRARY_PATH="$HERE/usr/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
+exec "$HERE/opt/python/bin/python3" -m dmpkeys "$@"

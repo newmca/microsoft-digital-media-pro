@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Digital Media Pro Keys
+GenericName=Keyboard Key Mapper
+Comment=Choose what the special keys of the Microsoft Digital Media Pro Keyboard do
+Exec=dmpkeys
+Icon=io.github.newmca.DmpKeys
+Terminal=false
+Categories=Settings;HardwareSettings;Qt;
+Keywords=keyboard;keys;media;remap;favorites;zoom;hotkeys;shortcuts;
+StartupNotify=true
+StartupWMClass=dmpkeys

@@ -1,0 +1,9 @@
+# Pinned, hash-checked runtime dependencies bundled into the AppImage.
+# PySide6-Essentials (not the PySide6 meta package) skips the large Addons wheel;
+# dmpkeys only needs QtCore/QtGui/QtWidgets/QtSvg/QtSvgWidgets.
+pyside6-essentials==6.11.3 \
+    --hash=sha256:c6a5c3b58bf55aef6e09a7de690ff6133335014ab81a7f22f56363ea08e8f6a3
+shiboken6==6.11.3 \
+    --hash=sha256:e601c957011345c741b88f661a12486f478db881d6777bdf37e3dc7a8d3387c6
+jeepney==0.9.0 \
+    --hash=sha256:97e5714520c16fc0a45695e5365a2e11b81ea79bba796e26f9f1d178cb182683

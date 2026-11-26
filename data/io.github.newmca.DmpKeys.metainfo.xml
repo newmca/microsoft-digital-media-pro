@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.newmca.DmpKeys</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Digital Media Pro Keys</name>
+  <summary>Remap Digital Media Pro keys</summary>
+  <developer id="io.github.newmca">
+    <name>newmca</name>
+  </developer>
+
+  <description>
+    <p>
+      Choose what the special keys and the zoom slider of the Microsoft Digital Media Pro
+      Keyboard do on Linux. Pick an action for each key, such as launching an application,
+      sending a media key or running a shortcut, and apply it with one click.
+    </p>
+    <p>
+      The app also repairs the five My Favorites keys, which the kernel does not report by default.
+      Changes are written to the system key mapping database and desktop shortcuts, and can be
+      undone from the same window.
+    </p>
+    <p>
+      Applying changes to the system asks for an administrator password. KDE Plasma and GNOME are supported.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">io.github.newmca.DmpKeys.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://raw.githubusercontent.com/newmca/microsoft-digital-media-pro/main/docs/screenshots/main-slider-light.png</image>
+      <caption>Turning the zoom slider into a brightness control</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/newmca/microsoft-digital-media-pro/main/docs/screenshots/main-favorite-problem-dark.png</image>
+      <caption>Binding the My Favorites keys to apps, with conflicts explained</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/newmca/microsoft-digital-media-pro/main/docs/screenshots/apply-preview-light.png</image>
+      <caption>Reviewing changes before applying them</caption>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">https://github.com/newmca/microsoft-digital-media-pro</url>
+  <url type="bugtracker">https://github.com/newmca/microsoft-digital-media-pro/issues</url>
+
+  <categories>
+    <category>Settings</category>
+    <category>HardwareSettings</category>
+  </categories>
+  <keywords>
+    <keyword>keyboard</keyword>
+    <keyword>keys</keyword>
+    <keyword>media</keyword>
+    <keyword>remap</keyword>
+    <keyword>hotkeys</keyword>
+  </keywords>
+
+  <provides>
+    <binary>dmpkeys</binary>
+  </provides>
+
+  <requires>
+    <display_length compare="ge">500</display_length>
+  </requires>
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </supports>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.1.0" date="2026-11-25">
+      <description>
+        <p>First release.</p>
+      </description>
+    </release>
+  </releases>
+</component>

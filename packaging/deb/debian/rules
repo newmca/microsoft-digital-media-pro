@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME = dmpkeys
+export PYBUILD_SYSTEM = pyproject
+
+APP_ID = io.github.newmca.DmpKeys
+PKG = debian/dmpkeys
+
+%:
+	dh $@ --with python3 --buildsystem=pybuild
+
+override_dh_auto_install:
+	dh_auto_install
+	install -Dm0755 src/dmpkeys/helper.py $(PKG)/usr/libexec/dmpkeys/dmpkeys-helper
+
+override_dh_auto_test:
+	desktop-file-validate data/$(APP_ID).desktop
+	appstreamcli validate --no-net data/$(APP_ID).metainfo.xml
+	xmllint --noout data/$(APP_ID).policy

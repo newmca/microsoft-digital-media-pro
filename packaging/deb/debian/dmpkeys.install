@@ -1,0 +1,4 @@
+data/io.github.newmca.DmpKeys.desktop usr/share/applications
+data/io.github.newmca.DmpKeys.metainfo.xml usr/share/metainfo
+data/io.github.newmca.DmpKeys.policy usr/share/polkit-1/actions
+data/icons/hicolor/scalable/apps/io.github.newmca.DmpKeys.svg usr/share/icons/hicolor/scalable/apps

@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dmpkeys"
+dynamic = ["version"]
+description = "Remap the special keys and zoom slider of the Microsoft Digital Media Pro Keyboard on Linux"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = ["PySide6>=6.5", "jeepney>=0.7"]
+classifiers = [
+  "Environment :: X11 Applications :: Qt",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Topic :: System :: Hardware",
+]
+
+[project.scripts]
+dmpkeys = "dmpkeys.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/newmca/microsoft-digital-media-pro"
+
+[tool.setuptools.dynamic]
+version = {attr = "dmpkeys.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+dmpkeys = ["data/*.json", "ui/resources/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

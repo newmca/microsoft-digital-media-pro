@@ -1,0 +1,40 @@
+Source: dmpkeys
+Section: utils
+Priority: optional
+Maintainer: newmca <noreply@users.noreply.github.com>
+Build-Depends:
+ appstream,
+ debhelper-compat (= 13),
+ desktop-file-utils,
+ dh-python,
+ libxml2-utils,
+ pybuild-plugin-pyproject,
+ python3-all,
+ python3-setuptools,
+Standards-Version: 4.7.0
+Homepage: https://github.com/newmca/microsoft-digital-media-pro
+Rules-Requires-Root: no
+
+Package: dmpkeys
+Architecture: all
+Depends:
+ kmod,
+ pkexec,
+ python3-jeepney,
+ python3-pyside6.qtcore,
+ python3-pyside6.qtgui,
+ python3-pyside6.qtsvg,
+ python3-pyside6.qtsvgwidgets,
+ python3-pyside6.qtwidgets,
+ qt6-svg-plugins,
+ udev,
+ util-linux,
+ ${misc:Depends},
+ ${python3:Depends},
+Recommends:
+ qt6-wayland,
+Description: Remap the special keys of the Microsoft Digital Media Pro Keyboard
+ Digital Media Pro Keys lets you choose what the special keys and the zoom
+ slider of the Microsoft Digital Media Pro Keyboard do. It repairs the five
+ My Favorites keys and writes the key mapping through a small root helper that
+ is authorised with polkit.

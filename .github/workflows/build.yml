@@ -1,0 +1,82 @@
+name: Build packages
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    name: ${{ matrix.target }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: rpm
+            files: |
+              dist/*.rpm
+          - target: deb
+            files: |
+              dist/*.deb
+          - target: appimage
+            files: |
+              dist/*.AppImage
+          - target: flatpak
+            files: |
+              dist/*.flatpak
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Flatpak tooling
+        if: matrix.target == 'flatpak'
+        run: sudo apt-get update && sudo apt-get install -y flatpak flatpak-builder dbus-user-session
+
+      # All build and test logic lives in packaging/; see packaging/build-all.sh.
+      - name: Build
+        run: packaging/build-all.sh ${{ matrix.target }}
+
+      - name: Install test
+        run: |
+          if [ "${{ matrix.target }}" = flatpak ]; then
+            dbus-run-session -- packaging/test-install.sh flatpak
+          else
+            packaging/test-install.sh ${{ matrix.target }}
+          fi
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dmpkeys-${{ matrix.target }}
+          path: ${{ matrix.files }}
+          if-no-files-found: error
+
+  release:
+    name: GitHub Release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: package
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Tag matches the package version
+        run: |
+          . packaging/common.sh
+          [ "v$VERSION" = "$GITHUB_REF_NAME" ] || die "tag $GITHUB_REF_NAME does not match version $VERSION"
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: dmpkeys-*
+          path: dist
+          merge-multiple: true
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/* --title "$GITHUB_REF_NAME" --generate-notes --verify-tag
