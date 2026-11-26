@@ -1,3 +1,5 @@
+<img src="data/icons/hicolor/scalable/apps/io.github.newmca.DmpKeys.svg" width="96" align="right" alt="">
+
 # Digital Media Pro Keys
 
 Make every special key on the **Microsoft Digital Media Pro Keyboard** (USB
@@ -82,6 +84,11 @@ The details, including the measurements and dead ends behind them, are in
 [docs/NOTES.md](docs/NOTES.md).
 
 ## Limitations
+
+- On KDE Plasma, right after installing, the taskbar may show the window with
+  no icon: the running panel doesn't notice icons installed after it started.
+  It appears after logging out and in (or `systemctl --user restart
+  plasma-plasmashell`).
 
 - Keys marked "not yet confirmed" use the standard HID codes for their
   function; use **Detect keys** to check them on your keyboard.

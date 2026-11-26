@@ -12,9 +12,13 @@ from ..core.apps import App
 
 
 def app_icon() -> QIcon:
-    """The installed theme icon, or the copy shipped inside the package."""
+    """The copy shipped inside the package, so it always matches the running version
+    (a theme lookup can find a stale icon from another install); the theme icon
+    only if the bundled file is missing."""
     bundled = resources.files("dmpkeys.ui").joinpath(f"resources/{APP_ID}.svg")
-    return QIcon.fromTheme(APP_ID, QIcon(str(bundled)))
+    if bundled.is_file():
+        return QIcon(str(bundled))
+    return QIcon.fromTheme(APP_ID)
 
 
 def icon_from_name(name: str, fallback: str = "application-x-executable") -> QIcon:
